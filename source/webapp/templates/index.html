@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    button {
+        margin-left: 30px;
+        width: 100px;
+    }
+</style>
+<body>
+Num_1 = <input type="number" id="num_1">
+Num_2 = <input type="number" id="num_2">
+    <button value="+" id="plus">+</button>
+    <button value="-" id="minus">-</button>
+    <button value="*" id="multiply">*</button>
+    <button value="/" id="divide">/</button>
+<p>Результат: <span id="result"></span></p>
+</body>
+<script>
+    // Сумма
+        let num1 = document.getElementById('num_1');
+        let num2 = document.getElementById('num_2');
+        let plus = document.getElementById('plus');
+        let multiply = document.getElementById('multiply');
+        let subtract = document.getElementById('minus');
+        let divide = document.getElementById('divide');
+        let result = document.getElementById('result');
+
+
+        // Добавить
+        let xhr = new XMLHttpRequest();
+        plus.addEventListener("click", function (){
+            xhr.onload = function (){
+                let data = JSON.parse(xhr.response)
+                result.innerHTML = data.answer
+                result.style.color = 'green'
+                if (xhr.status ===  400){
+                    result.innerHTML = data.error
+                    result.style.color = 'red'
+                }
+            }
+            a = num1.value
+            b = num2.value
+            xhr.open('POST', 'http://127.0.0.1:8000/add/' )
+            xhr.setRequestHeader('Contet-Type', 'application/json')
+            xhr.send(JSON.stringify({'A':a, 'B': b}))
+        })
+    // Минус
+        subtract.addEventListener("click", function (){
+            xhr.onload = function (){
+                let data = JSON.parse(xhr.response)
+                result.innerHTML = data.answer
+                result.style.color = 'green'
+                if (xhr.status ===  400){
+                    result.innerHTML = data.error
+                    result.style.color = 'red'
+                }
+            }
+            c = num1.value
+            d = num2.value
+            xhr.open('POST', 'http://127.0.0.1:8000/subtract/')
+            xhr.setRequestHeader('Contet-Type', 'application/json')
+            xhr.send(JSON.stringify({'A':c, 'B': d}))
+        })
+    // Умножить
+        multiply.addEventListener("click", function (){
+            xhr.onload = function (){
+                let data = JSON.parse(xhr.response)
+                result.innerHTML = data.answer
+                result.style.color = 'green'
+                if (xhr.status ===  400){
+                    result.innerHTML = data.error
+                    result.style.color = 'red'
+                }
+            }
+            e = num1.value
+            f = num2.value
+            xhr.open('POST', 'http://127.0.0.1:8000/multiply/')
+            xhr.setRequestHeader('Contet-Type', 'application/json')
+            xhr.send(JSON.stringify({'A':e, 'B': f}))
+        })
+    // Делить
+        divide.addEventListener("click", function (){
+            xhr.onload = function (){
+                let data = JSON.parse(xhr.response)
+                result.innerHTML = data.answer
+                result.style.color = 'green'
+                if (xhr.status ===  400){
+                    result.innerHTML = data.error
+                    result.style.color = 'red'
+                }
+            }
+            c = num1.value
+            n = num2.value
+            xhr.open('POST', 'http://127.0.0.1:8000/divide/')
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.send(JSON.stringify({'A':c, 'B': n}))
+        })
+
+</script>
+</html>
